@@ -49,7 +49,7 @@ public:
 	}
 
 	~node() {
-
+		
 	}
 
 	void setParent(node* node_parent) {
@@ -86,6 +86,33 @@ public:
 
 	void changeColor() {
 		color = !color;
+	}
+
+	void leftRotation() {
+		//changing parent`s child
+		if (value > parent->value) parent->right = right;
+		else parent->left = right;
+		//changing lower node`s parent and left child
+		right->parent = parent;
+		right->left = this;
+		//changing top node`s parent and right child
+		parent = right;
+		right = right->left;
+		//set top node as parent of lower node`s left child
+		right->parent = this;
+	}
+
+	void rightRotation() {
+		if (value > parent->value) parent->right = left;
+		else parent->left = left;
+
+		left->parent = parent;
+		left->right = this;
+
+		parent = left;
+		left = left->right;
+
+		left->parent = this;
 	}
 };
 #endif
