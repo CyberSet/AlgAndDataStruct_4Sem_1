@@ -5,16 +5,17 @@ using namespace std;
 #define NODE_H
 #define black false
 #define red true
+template<class T1, class T2>
 class node {
 private:
-	string key;
-	int value;
-	node* parent;
+	T1 key;
+	T2 value;
+	node<T1, T2>* parent;
 	bool color; // false - black, true - red
-	node* left, * right;
+	node<T1, T2>* left, * right;
 public:
 	node() {
-		key = "";
+		key = 0;
 		value = 0;
 		parent = nullptr;
 		color = red;
@@ -22,7 +23,7 @@ public:
 		right = nullptr;
 	}
 
-	node(string node_key, int node_value, node* node_parent = nullptr, bool node_color = red, node* node_leftChild = nullptr, node* node_rightChild = nullptr) {
+	node(T1 node_key, T2 node_value, node<T1, T2>* node_parent = nullptr, bool node_color = red, node<T1, T2>* node_leftChild = nullptr, node<T1, T2>* node_rightChild = nullptr) {
 		key = node_key;
 		value = node_value;
 		parent = node_parent;
@@ -31,7 +32,7 @@ public:
 		right = node_rightChild;
 	}
 
-	node& operator= (node equated_node) {
+	node<T1, T2>& operator= (node<T1, T2> equated_node) {
 		key = equated_node.key;
 		value = equated_node.value;
 		parent = equated_node.parent;
@@ -40,39 +41,47 @@ public:
 		right = equated_node.right;
 	}
 
-	friend bool operator> (const node& firstCompared, const node& secondCompared) {
-		return firstCompared.value > secondCompared.value;
+	friend bool operator> (const node<T1, T2>& firstCompared, const node<T1, T2>& secondCompared) {
+		return firstCompared.key > secondCompared.key;
 	}
 
-	friend bool operator< (const node& firstCompared, const node& secondCompared) {
-		return firstCompared.value < secondCompared.value;
+	friend bool operator< (const node<T1, T2>& firstCompared, const node<T1, T2>& secondCompared) {
+		return firstCompared.key < secondCompared.key;
 	}
 
 	~node() {
 		
 	}
 
-	void setParent(node* node_parent) {
+	T1 getValue() {
+		return value;
+	}
+
+	T2 getKey() {
+		return key;
+	}
+
+	void setParent(node<T1, T2>* node_parent) {
 		parent = node_parent;
 	}
 
-	node* getParent() {
+	node<T1, T2>* getParent() {
 		return parent;
 	}
 
-	void setLeftChild(node* leftChild) {
+	void setLeftChild(node<T1, T2>* leftChild) {
 		left = leftChild;
 	}
 
-	node* getLeftChild() {
+	node<T1, T2>* getLeftChild() {
 		return left;
 	}
 
-	void setRightChild(node* rightChild) {
+	void setRightChild(node<T1, T2>* rightChild) {
 		right = rightChild;
 	}
 
-	node* getRightChild() {
+	node<T1, T2>* getRightChild() {
 		return right;
 	}
 
