@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 using namespace std;
 #ifndef NODE_H
 #define NODE_H
@@ -15,15 +16,13 @@ private:
 	node<T1, T2>* left, * right;
 public:
 	node() {
-		key = 0;
-		value = 0;
 		parent = nullptr;
 		color = red;
 		left = nullptr;
 		right = nullptr;
 	}
 
-	node(T1 node_key, T2 node_value, node<T1, T2>* node_parent = nullptr, bool node_color = red, node<T1, T2>* node_leftChild = nullptr, node<T1, T2>* node_rightChild = nullptr) {
+	node(T1 node_key, T2 node_value, node<T1, T2>* node_parent = nullptr, node<T1, T2>* node_leftChild = nullptr, node<T1, T2>* node_rightChild = nullptr, bool node_color = red) {
 		key = node_key;
 		value = node_value;
 		parent = node_parent;
@@ -49,16 +48,24 @@ public:
 		return firstCompared.key < secondCompared.key;
 	}
 
+	friend bool operator== (const node<T1, T2>& firstCompared, const node<T1, T2>& secondCompared) {
+		return firstCompared.key == secondCompared.key;
+	}
+
+	friend bool operator!= (const node<T1, T2>& firstCompared, const node<T1, T2>& secondCompared) {
+		return firstCompared.key != secondCompared.key;
+	}
+
 	~node() {
 		
 	}
 
-	T1 getValue() {
-		return value;
+	T1 getKey() {
+		return key;
 	}
 
-	T2 getKey() {
-		return key;
+	T2 getValue() {
+		return value;
 	}
 
 	void setParent(node<T1, T2>* node_parent) {
@@ -97,31 +104,14 @@ public:
 		color = !color;
 	}
 
-	void leftRotation() {
-		//changing parent`s child
-		if (value > parent->value) parent->right = right;
-		else parent->left = right;
-		//changing lower node`s parent and left child
-		right->parent = parent;
-		right->left = this;
-		//changing top node`s parent and right child
-		parent = right;
-		right = right->left;
-		//set top node as parent of lower node`s left child
-		right->parent = this;
+	void showInfo() {
+		cout << "Элемент с ключом " << key << " и значением " << value << (isRed() ? " красного " : " черного ") << "цвета, предок с ключом " << parent->key << ", левый ребенок с ключом " << left->key << ", правый ребенок с ключом " << right->key << endl;
 	}
-
-	void rightRotation() {
-		if (value > parent->value) parent->right = left;
-		else parent->left = left;
-
-		left->parent = parent;
-		left->right = this;
-
-		parent = left;
-		left = left->right;
-
-		left->parent = this;
+	
+	void print(node<T1, T2>* nil) {
+		showInfo();
+		if (left != nil) left->print(nil);
+		if (right != nil) right->print(nil);
 	}
 };
 #endif
