@@ -13,7 +13,7 @@ namespace mapUnitTest
 		list<int> *keys = new list<int>;
 		TEST_METHOD(CreateTest)
 		{	
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->getSize() == 0);
 		}
 
@@ -22,7 +22,7 @@ namespace mapUnitTest
 			test.insert(1, "jan");
 			test.insert(2, "feb");
 			test.insert(3, "mar");
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->at(0) == 2 && keys->at(1) == 1 && keys->at(2) == 3);
 		}
 
@@ -32,7 +32,7 @@ namespace mapUnitTest
 			test.insert(2, "feb");
 			test.insert(3, "mar");
 			test.leftRotation(test.getRoot());
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->at(0) == 3 && keys->at(1) == 2 && keys->at(2) == 1);
 		}
 
@@ -42,7 +42,7 @@ namespace mapUnitTest
 			test.insert(2, "feb");
 			test.insert(3, "mar");
 			test.rightRotation(test.getRoot());
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->at(0) == 1 && keys->at(1) == 2 && keys->at(2) == 3);
 		}
 
@@ -52,7 +52,7 @@ namespace mapUnitTest
 			test.insert(2, "feb");
 			test.insert(3, "mar");
 			test.remove(2);
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->at(0) == 1 && keys->at(1) == 3);
 		}
 
@@ -72,7 +72,7 @@ namespace mapUnitTest
 			test.insert(2, "feb");
 			test.insert(3, "mar");
 			test.clear();
-			test.get_keys(keys);
+			keys = test.get_keys();
 			Assert::IsTrue(keys->getSize() == 0);
 		}
 

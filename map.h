@@ -245,9 +245,10 @@ public:
 		while (root != nil) remove(root->getKey());
 	}
 
-	void get_keys(list<T1>* temp) {
-		temp->clear();
+	list<T1>* get_keys() {
+		list<T1>* temp = new list<T1>();
 		if(root != nil)get_keys(temp, root);
+		return temp;
 	}
 
 	void get_keys(list<T1>* temp, node<T1, T2>*cur) {
@@ -256,9 +257,10 @@ public:
 		if (cur->getRightChild() != nil) get_keys(temp, cur->getRightChild());
 	}
 
-	void get_values(list<T2>* temp) {
-		temp->clear();
+	list<T2>* get_values() {
+		list<T2>* temp = new list<T1>();
 		if (root != nil)get_values(temp, root);
+		return temp;
 	}
 
 	void get_values(list<T2>* temp, node<T1, T2>* cur) {

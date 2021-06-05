@@ -8,7 +8,7 @@ int main() {
 	list<int>* keys = new list<int>();
 	list<string>* values = new list<string>();
 	node<int, string>* temp = new node<int, string>;
-	test.get_keys(keys);
+	keys = test.get_keys();
 	test.insert(1, "jan");
 	test.insert(2, "feb");
 	test.insert(3, "mar");
@@ -22,8 +22,8 @@ int main() {
 	test.insert(11, "nov");
 	test.insert(12, "dec");
 	test.print();
-	test.get_keys(keys);
-	test.get_values(values);
+	keys = test.get_keys();
+	values = test.get_values();
 	keys->print_to_console();
 	cout << endl;
 	values->print_to_console();
